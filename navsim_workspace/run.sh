@@ -2,6 +2,10 @@ set -x
 
 export HYDRA_FULL_ERROR=1
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/" && pwd -P)"
+
+export PYTHONPATH=$PYTHONPATH:${DIR}/navsim:${DIR}/nuplan-devkit
+
 # add ~/.bashrc
 # export NUPLAN_MAPS_ROOT="$HOME/github/navsim_workspace/dataset/maps"
 # export NAVSIM_EXP_ROOT="$HOME/github/navsim_workspace/exp"
@@ -15,7 +19,19 @@ export HYDRA_FULL_ERROR=1
 # bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 # rm -rf ~/miniconda3/miniconda.sh
 
+# install jupyter notebook for conda env
+# conda install -c conda-forge notebook
+# conda activate navsim
+# conda install ipykernel
+# python -m ipykernel install --user --name=navsim
+
+# visualization
+# select kernel to use navsim which is conda python kernel and contains conda packages
+jupyter notebook &
+
+
 # preprocess & cache
+# output: exp/metric_cache
 # ./navsim/scripts/evaluation/run_metric_caching.sh
 
 # training
@@ -32,7 +48,7 @@ export HYDRA_FULL_ERROR=1
 # 3615,average,True,0.9258644536652836,0.9156293222683264,0.9991701244813278,0.7556808946641205,0.8816044260027662,1.0,0.8013567404824862
 
 # ego mlp agent
-./navsim/scripts/evaluation/run_ego_mlp_agent_pdm_score_evaluation.sh
+# ./navsim/scripts/evaluation/run_ego_mlp_agent_pdm_score_evaluation.sh
 
 # human agent
 # ./navsim/scripts/evaluation/run_human_agent_pdm_score_evaluation.sh
@@ -41,3 +57,4 @@ export HYDRA_FULL_ERROR=1
 # seq,token,valid,no_at_fault_collisions,drivable_area_compliance,driving_direction_compliance,ego_progress,time_to_collision_within_bound,comfort,score
 # 3614,dd1e26943afe52bc,True,1.0,1.0,1.0,0.8350611325112367,1.0,1.0,0.931275471879682
 # 3615,average,True,0.9955739972337483,0.9817427385892116,0.9991701244813278,0.8716685864329,0.9786998616874135,0.9988934993084371,0.9259548376197573
+
