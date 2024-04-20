@@ -6,7 +6,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/" && pwd -P)"
 
 export PYTHONPATH=$PYTHONPATH:${DIR}/navsim:${DIR}/nuplan-devkit
 
-if [ $# -lt 2 ]; then
+if [ $# -lt 1 ]; then
   echo "run.sh [cmd]"
   echo "cmd: notebook, cache, training, eval"
   exit
@@ -67,6 +67,8 @@ esac
 #  trusted-host =  mirrors.aliyun.com
 #  index-url = http://mirrors.aliyun.com/pypi/simple
 # EOF
+
+# rsync -ahvPz maps zt@172.25.117.74:~/cvpr/zt/navsim_workspace/dataset
 
 # install conda
 # mkdir -p ~/miniconda3
