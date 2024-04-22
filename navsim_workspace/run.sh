@@ -8,7 +8,7 @@ export PYTHONPATH=$PYTHONPATH:${DIR}/navsim:${DIR}/nuplan-devkit
 
 if [ $# -lt 1 ]; then
   echo "run.sh [cmd]"
-  echo "cmd: notebook, cache, training, eval"
+  echo "cmd: notebook, cache, training, eval_cv, eval_human, eval_mlp"
   exit
 fi
 
@@ -27,9 +27,10 @@ case $1 in
         # training
         ./navsim/scripts/training/run_ego_mlp_agent_training.sh
         ;;
-    "eval")
+    "eval_cv")
         # const velocity agent evaluation
         ./navsim/scripts/evaluation/run_cv_pdm_score_evaluation.sh
+        ;;
 
         # output
         # [hujiangtao@dream:  ~/github/navsim_workspace/exp/cv_agent/2024.04.16.17.46.45 ] conda:base
@@ -37,21 +38,23 @@ case $1 in
         # seq,token,valid,no_at_fault_collisions,drivable_area_compliance,driving_direction_compliance,ego_progress,time_to_collision_within_bound,comfort,score
         # 3614,dd1e26943afe52bc,True,1.0,1.0,1.0,0.8906223480884186,1.0,1.0,0.9544259783701744
         # 3615,average,True,0.9258644536652836,0.9156293222683264,0.9991701244813278,0.7556808946641205,0.8816044260027662,1.0,0.8013567404824862
-
-        # ego mlp agent
-        # ./navsim/scripts/evaluation/run_ego_mlp_agent_pdm_score_evaluation.sh
-
+    "eval_human")
         # human agent
-        # ./navsim/scripts/evaluation/run_human_agent_pdm_score_evaluation.sh
+        ./navsim/scripts/evaluation/run_human_agent_pdm_score_evaluation.sh
         # output: /github/navsim_workspace/exp/human_agent/2024.04.16.17.56.36
         # HumanAgent_2024.04.16.18.01.19.csv
         # seq,token,valid,no_at_fault_collisions,drivable_area_compliance,driving_direction_compliance,ego_progress,time_to_collision_within_bound,comfort,score
         # 3614,dd1e26943afe52bc,True,1.0,1.0,1.0,0.8350611325112367,1.0,1.0,0.931275471879682
         # 3615,average,True,0.9955739972337483,0.9817427385892116,0.9991701244813278,0.8716685864329,0.9786998616874135,0.9988934993084371,0.9259548376197573
         ;;
+
+    "eval_mlp")
+        # ego mlp agent
+        ./navsim/scripts/evaluation/run_ego_mlp_agent_pdm_score_evaluation.sh
+        ;;
     *)
         echo "run.sh [cmd]"
-        echo "cmd: notebook, cache, training, eval"
+        echo "cmd: notebook, cache, training, eval_cv, eval_human, eval_mlp"
         ;;
 esac
 
