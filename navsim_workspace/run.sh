@@ -8,7 +8,7 @@ export PYTHONPATH=$PYTHONPATH:${DIR}/navsim:${DIR}/nuplan-devkit
 
 if [ $# -lt 1 ]; then
   echo "run.sh [cmd]"
-  echo "cmd: notebook, cache, training, eval_cv, eval_human, eval_mlp"
+  echo "cmd: notebook, cache, training, eval_cv, eval_human, eval_mlp, eval_vad"
   exit
 fi
 
@@ -52,9 +52,13 @@ case $1 in
         # ego mlp agent
         ./navsim/scripts/evaluation/run_ego_mlp_agent_pdm_score_evaluation.sh
         ;;
+    "eval_vad")
+        # vad agent
+        ./navsim/scripts/evaluation/run_vad_agent_pdm_score_evaluation.sh
+        ;;
     *)
         echo "run.sh [cmd]"
-        echo "cmd: notebook, cache, training, eval_cv, eval_human, eval_mlp"
+        echo "cmd: notebook, cache, training, eval_cv, eval_human, eval_mlp, eval_vad"
         ;;
 esac
 
