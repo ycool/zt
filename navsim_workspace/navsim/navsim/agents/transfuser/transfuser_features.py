@@ -38,7 +38,7 @@ class TransfuserFeatureBuilder(AbstractFeatureBuilder):
         features = {}
 
         features["camera_feature"] = self._get_camera_feature(agent_input)
-        features["lidar_feature"] = self._get_lidar_feature(agent_input)
+        # features["lidar_feature"] = self._get_lidar_feature(agent_input)
         features["status_feature"] = torch.concatenate(
             [
                 torch.tensor(agent_input.ego_statuses[-1].driving_command, dtype=torch.float32),

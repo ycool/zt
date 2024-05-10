@@ -401,11 +401,12 @@ class Scene:
                 sensor_names=sensor_names,
             )
 
-            lidar = Lidar.from_paths(
-                sensor_blobs_path=sensor_blobs_path,
-                lidar_path=Path(scene_dict_list[frame_idx]["lidar_path"]),
-                sensor_names=sensor_names,
-            )
+            # lidar = Lidar.from_paths(
+            #     sensor_blobs_path=sensor_blobs_path,
+            #     lidar_path=Path(scene_dict_list[frame_idx]["lidar_path"]),
+            #     sensor_names=sensor_names,
+            # )
+            lidar = None
 
             frame = Frame(
                 token=scene_dict_list[frame_idx]["token"],
